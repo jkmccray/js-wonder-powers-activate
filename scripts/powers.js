@@ -1,37 +1,60 @@
-// Flight Button
-const flightHandlerFunction = () => {
-  document.querySelector("#flight").classList.toggle("disabled")
-  document.querySelector("#flight").classList.toggle("enabled")
-}
+// // Flight Button
+// const flightHandlerFunction = (event) => {
+//   document.querySelector("#flight").classList.toggle("disabled")
+//   document.querySelector("#flight").classList.toggle("enabled")
+// }
 
-document.querySelector("#activate-flight").addEventListener("click", flightHandlerFunction)
+// document.querySelector("#activate-flight").addEventListener("click", flightHandlerFunction)
 
-// Mind Reading Button
-const mindReadingHandlerFunction = () => {
-  document.querySelector("#mindreading").classList.toggle("disabled")
-  document.querySelector("#mindreading").classList.toggle("enabled")
-}
+// // Mind Reading Button
+// const mindReadingHandlerFunction = (event) => {
+//   document.querySelector("#mindreading").classList.toggle("disabled")
+//   document.querySelector("#mindreading").classList.toggle("enabled")
+// }
 
-document.querySelector("#activate-mindreading").addEventListener("click", mindReadingHandlerFunction)
+// document.querySelector("#activate-mindreading").addEventListener("click", mindReadingHandlerFunction)
 
-// Xray Button
-const xrayHandlerFunction = () => {
-  document.querySelector("#xray").classList.toggle("disabled")
-  document.querySelector("#xray").classList.toggle("enabled")
-}
+// // Xray Button
+// const xrayHandlerFunction = (event) => {
+//   document.querySelector("#xray").classList.toggle("disabled")
+//   document.querySelector("#xray").classList.toggle("enabled")
+// }
 
-document.querySelector("#activate-xray").addEventListener("click", xrayHandlerFunction)
+// document.querySelector("#activate-xray").addEventListener("click", xrayHandlerFunction)
 
-// Activate All and Deactivate All
+// // Activate All and Deactivate All
 const collectionOfSections = document.querySelectorAll(".power")
-const allEventHandlerFunction = () => {
+const activateAllHandlerFunction = (event) => {
   collectionOfSections.forEach(section => {
-    section.classList.toggle("disabled")
-    section.classList.toggle("enabled")
+    section.classList.remove("disabled")
+    section.classList.add("enabled")
   })
 }
 
-document.querySelector("#activate-all").addEventListener("click", allEventHandlerFunction)
+document.querySelector("#activate-all").addEventListener("click", activateAllHandlerFunction)
 
-document.querySelector("#deactivate-all").addEventListener("click", allEventHandlerFunction) 
+const deactivateAllHandlerFunction = (event) => {
+  collectionOfSections.forEach(section => {
+    section.classList.add("disabled")
+    section.classList.remove("enabled")
+  })
+}
+document.querySelector("#deactivate-all").addEventListener("click", deactivateAllHandlerFunction) 
+
+
+// ------ Challenge: One Function to Rule Them All ------
+const collectionOfButtons = document.querySelectorAll("button")
+collectionOfButtons.forEach(button => {
+  const idArray = button.id.split("-")
+  if (idArray[1] !== "all") {
+    button.addEventListener("click", genericHandlerFunction)
+  }
+})
+
+function genericHandlerFunction(event) {
+  const sectionById = document.querySelector(`#${event.target.id.split("-")[1]}`)
+  sectionById.classList.toggle("disabled")
+  sectionById.classList.toggle("enabled")
+}
+
 
